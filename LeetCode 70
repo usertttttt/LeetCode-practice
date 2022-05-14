@@ -1,0 +1,12 @@
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        if n<=2:
+            return n
+        # 初始化前两项
+        p, q = 1, 2
+        # 从第三项开始遍历，左开右闭
+        for i in range(3, n+1):
+            # 节省空间，不使用dp数组，这里可以手推一下：
+            # 设n为4，则有i=3：p, q = q, (p+q) = 2, 3；i=4: p, q = q, (p+q) = 3, 5，故结果为5
+            p, q = q, (p+q)
+        return q
