@@ -1,0 +1,9 @@
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        n, mostlength = len(nums), 0
+        for i in range(n):
+            if i <= mostlength:
+                mostlength = max(mostlength, i + nums[i])
+                if mostlength >= n - 1:
+                    return True
+        return False
