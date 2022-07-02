@@ -1,0 +1,9 @@
+class Solution:
+    def maximumWealth(self, accounts: List[List[int]]) -> int:
+        max_wealth_current = 0
+        for account in accounts:
+            #add money from each bank
+            wealth_current = sum(account)
+            max_wealth_current = max(max_wealth_current, wealth_current)
+            
+        return max_wealth_current
