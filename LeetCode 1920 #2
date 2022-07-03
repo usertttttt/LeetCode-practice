@@ -1,0 +1,10 @@
+class Solution:
+    def buildArray(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        # 第一次遍历编码最终值
+        for i in range(n):
+            nums[i] += 1000 * (nums[nums[i]] % 1000) 
+        # 第二次遍历修改为最终值
+        for i in range(n):
+            nums[i] //= 1000
+        return nums
