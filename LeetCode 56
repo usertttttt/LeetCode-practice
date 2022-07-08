@@ -1,0 +1,14 @@
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        intervals.sort(key=lambda x: x[0])#把区间根据左侧端点排序
+        merged = []#把结果存储在数组“merge”中
+        for interval in intervals:
+            # 如果列表为空，或者当前区间与上一区间不重合，直接添加
+            if not merged or merged[-1][1] < interval[0]:
+                #其中，merged[-1][1]指数组“merge”中最后的一组区间的最右端的值
+                merged.append(interval)
+            else:
+                # 否则，与上一区间进行合并
+                merged[-1][1] = max(merged[-1][1], interval[1])
+
+        return merged
