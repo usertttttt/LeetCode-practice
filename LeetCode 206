@@ -1,0 +1,12 @@
+dummy = None
+        pre = dummy
+        cur = head
+        while cur:
+            # 记录下nxt节点，避免丢失
+            nxt = cur.next
+            # cur节点指向pre，反转cur节点的指向
+            cur.next = pre
+            # pre前移一位；cur前移一位
+            pre = cur
+            cur = nxt
+        return pre
