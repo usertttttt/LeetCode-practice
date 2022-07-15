@@ -1,0 +1,36 @@
+class MyHashMap:
+
+    def __init__(self):
+        self.N = 1009        
+        self.data = [[-1] * self.N for _ in range(self.N)]
+
+    def getHashKey1(self, key):
+        return key % self.N
+    
+    def getHashKey2(self, key):
+        return key // self.N
+
+    def put(self, key, value):
+        hashKey1 = self.getHashKey1(key);
+        hashKey2 = self.getHashKey2(key);
+        self.data[hashKey1][hashKey2] = value
+
+
+    def get(self, key):
+        hashKey1 = self.getHashKey1(key);
+        hashKey2 = self.getHashKey2(key);
+        return self.data[hashKey1][hashKey2]
+
+
+    def remove(self, key):
+        hashKey1 = self.getHashKey1(key);
+        hashKey2 = self.getHashKey2(key);
+        self.data[hashKey1][hashKey2] = -1
+        
+
+
+# Your MyHashMap object will be instantiated and called as such:
+# obj = MyHashMap()
+# obj.put(key,value)
+# param_2 = obj.get(key)
+# obj.remove(key)
