@@ -1,0 +1,22 @@
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        if not matrix or not matrix[0]:
+            return list()
+        
+        rows, cols = len(matrix), len(matrix[0])
+        visited = [[False] * cols for _ in range(rows)]#辅助矩阵，用来记录是否已访问
+        total = rows * cols
+        order = [0] * total
+        
+        directions = [[0,1],[1,0],[0,-1],[-1,0]]#顺时针旋转
+        row, col = 0, 0 #初始化为左上点
+        directionIndex = 0
+        for i in range(total):
+            order[i] = matrix[row][col]
+            visited[row][col] = True
+            nextRow, nextCol = row + directions[directionIndex][0], col + directions[directionIndex][1]
+            if not (0 <= nextRow < rows and 0 <= nextCol < cols and not visited[nextRow][nextCol]):
+                directionIndex = (directionIndex + 1) % 4
+            row += directions[directionIndex][0]
+            col += directions[directionIndex][1]
+        return order
