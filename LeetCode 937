@@ -1,0 +1,12 @@
+class Solution:
+    def reorderLogFiles(self, logs: List[str]) -> List[str]:
+        letters = []#字母类放这里，需要后续排序，先看内容排序，相同的情况下再看标志排序
+        nums = []#数字类直接放这里，不用排序
+        for log in logs:
+            logsplit = log.split(" ")#每一个log的内容之间是用空白符分割
+            if logsplit[1].isalpha():#如果标志符之后是字母，则为letters
+                letters.append((" ".join(logsplit[1:]), logsplit[0]))
+            else:
+                nums.append(log)
+        letters.sort()#直接对letters里面的字母类进行内容排序
+        return [letter[1] + " " + letter[0] for letter in letters] + nums
