@@ -1,0 +1,13 @@
+class Solution:
+    def minimalKSum(self, nums: List[int], k: int) -> int:
+        ans = 0
+        nums.extend([0, inf])  # 加入两个哨兵
+        nums.sort()
+        for x, y in pairwise(nums):
+            fill = y - x - 1  # 可以填充的数字个数
+            if fill <= 0:  # 没有可以填充的位置
+                continue
+            if fill >= k:  # 填充剩余的 k 个数
+                return ans + (x * 2 + 1 + k) * k // 2  # 等差数列求和
+            ans += (x + y) * fill // 2  # 填充 fill 个数：等差数列求和
+            k -= fill  # 更新剩余要填充的数字个数
