@@ -1,0 +1,11 @@
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        from collections import Counter
+        count = Counter(nums)#计数
+        heap = []
+        for key, val in count.items():
+            heapq.heappush(heap, (val, key))
+        res = []
+        for item in heapq.nlargest(k, heap):
+            res.append(item[1])
+        return res
