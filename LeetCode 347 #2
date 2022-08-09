@@ -1,0 +1,6 @@
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        from collections import Counter
+        count = Counter(nums)
+        res = sorted(count, key = count.get, reverse = True)
+        return res[:k]
