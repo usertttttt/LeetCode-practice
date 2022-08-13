@@ -1,0 +1,12 @@
+class Solution:
+    def nextGreatestLetter(self, letters: List[str], target: str) -> str:
+        l, r = 0, len(letters)
+        while l < r:
+            mid = (l + r) // 2
+            if letters[mid] > target:
+                r = mid
+            else:
+                l = mid + 1
+        if l < len(letters):#如果不超过z
+            return letters[l]
+        return letters[0]#如果超过，就返回第一个
