@@ -1,0 +1,38 @@
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        left = 0
+        right = len(nums)-1
+        if len(nums) == 0:
+            return [-1,-1]
+        while left <= right:
+            mid = (left + right) // 2
+            if nums[mid] == target:
+                M = mid
+                R = right
+                #left right 为相同target的上下界
+                #左边
+                right = M
+                while left <= right:
+                    mid = (left + right) // 2
+                    if nums[mid] == target:
+                        right = mid - 1
+                    else:
+                        left = mid + 1
+                lef_ans = left
+                
+                #右边
+                left = M
+                right = R
+                while left <= right:
+                    mid = (left + right) // 2
+                    if nums[mid] == target:
+                        left = mid + 1
+                    else:
+                        right = mid - 1
+                rig_ans = right
+                return [lef_ans,rig_ans]
+            elif nums[mid] > target:
+                right = mid - 1
+            elif nums[mid] < target:
+                left = mid + 1
+        return [-1,-1]
