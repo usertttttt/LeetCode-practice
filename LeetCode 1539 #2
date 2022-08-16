@@ -1,0 +1,15 @@
+class Solution:
+    def findKthPositive(self, arr: List[int], k: int) -> int:
+        # 如果数组末尾的元素和索引的偏差值小于k，那直接返回数组长度+k即可
+        if arr[-1] - len(arr) < k:
+            return len(arr) + k
+        l, r = 0, len(arr)-1
+        while l < r:
+            mid = (l+r) // 2
+            # arr[mid] - mid - 1 代表数组元素与当前索引的差值，如果索引0的值为1，那差值为0
+            # 我希望索引最终停留在差值刚好>=k的位置，类似于找元素的插入位置
+            if arr[mid] - mid - 1 < k:
+                l = mid + 1
+            else:
+                r = mid
+        return k + l
