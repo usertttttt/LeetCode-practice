@@ -1,0 +1,17 @@
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        x, y  = len(matrix), len(matrix[0])     # 分别获得行数和列数
+        # 将二维矩阵展开为一维数组，考虑一维数组的左闭右闭区间
+        l, r = 0, x*y - 1
+        while(l <= r):   # 跳出循环时，l = r+1
+            mid = (l + r) // 2
+            # 根据一维数组索引mid，获得二维数组索引i和j
+            i = mid // y    # 行索引i为mid除y取整
+            j = mid %  y    # 列索引j为mid对y求模
+            if matrix[i][j] == target:
+                return True
+            elif matrix[i][j] > target:
+                r = mid-1
+            else:
+                l =  mid+1
+        return False
