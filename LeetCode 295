@@ -1,0 +1,34 @@
+class MedianFinder:
+
+    def __init__(self):
+        self.queMin = list()#分为两列，从最小到中间大是queMin
+        self.queMax = list()#从最大到中间小是queMax
+
+    def addNum(self, num: int) -> None:
+        queMin_ = self.queMin
+        queMax_ = self.queMax
+
+        if not queMin_ or num <= -queMin_[0]:#如果之前为空或者当前要进来的num比minheap最大的元素还小，则证明新插入的这个数肯定也比中位数小，那它应该放在minheap里
+            heapq.heappush(queMin_, -num)#队头加入num
+            if len(queMax_) + 1 < len(queMin_):#为了保证两队列的平均性，每次插入之后如果某个队列比另一个长度大1以上，则应该把一个元素拿出来放到另一个队列中
+                heapq.heappush(queMax_, -heapq.heappop(queMin_))
+        else:
+            heapq.heappush(queMax_, num)
+            if len(queMax_) > len(queMin_):
+                heapq.heappush(queMin_, -heapq.heappop(queMax_))
+        
+    def findMedian(self) -> float:
+        queMin_ = self.queMin
+        queMax_ = self.queMax
+
+        if len(queMin_) > len(queMax_):
+            return -queMin_[0]
+        return (-queMin_[0] + queMax_[0]) / 2
+
+        
+
+
+# Your MedianFinder object will be instantiated and called as such:
+# obj = MedianFinder()
+# obj.addNum(num)
+# param_2 = obj.findMedian()
