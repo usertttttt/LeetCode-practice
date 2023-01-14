@@ -1,0 +1,20 @@
+class Solution:
+    def threeSumClosest(self, nums: List[int], target: int) -> int:
+        nums.sort()
+        diff = float('inf')
+        maxSum = float('-inf')
+        for i in range(len(nums)):
+            l, r = i+1, len(nums)-1
+            while l<r:
+                curSum = nums[i] + nums[l] + nums[r]
+                if curSum == target:
+                    return target
+                elif abs(curSum-target) < diff:
+                    diff = abs(curSum-target)
+                    maxSum = curSum
+                elif curSum > target:
+                    r -= 1
+                else:
+                    l += 1
+                
+        return maxSum
