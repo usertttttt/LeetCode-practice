@@ -1,0 +1,20 @@
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        res, l, n = '', 0, len(s)
+        while l < n:
+            while l<n and s[l] == ' ':
+                l += 1
+            
+            if l >= n: break
+
+            r = l + 1
+            while r<n and s[r] != ' ':
+                r += 1
+            
+            temp = s[l:r]
+            if len(res) == 0:
+                res = temp
+            else:
+                res = temp + ' ' + res
+            l = r + 1
+        return res
